@@ -3,17 +3,19 @@
 
 name: yangpa-market backend
 
+# 바뀌는 대상 체크 지점
 on:
   push:
     # main 브랜치에 push
     branches:
       - main
-    # 바뀌는 파일 대상
+    # 바뀌는 파일 대상 (시점)
     paths:
       - 'yangpa-be/"*"'
       - ".github/workflows/be.yml"
   workflow_dispatch:
 
+# 단계별 해야할 작업 지정
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -29,6 +31,8 @@ jobs:
           node-version: "22.x"
 
       - name: npm install, build, and test
+        # 빌드할 디렉토리 지정
+        working-directory: yangpa-be
         run: |
           npm install
           npm run build --if-present
@@ -38,7 +42,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: .
+          path: yangpa-be
 
   deploy:
     runs-on: ubuntu-latest

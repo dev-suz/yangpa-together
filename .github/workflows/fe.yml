@@ -1,9 +1,13 @@
-name: Azure Static Web Apps CI/CD
+name: yangpa frontend
 
 on:
+  #  프론트의 경우 앱서비스를 이원화 하는게 대부분(push/ pr )임 2개
   push:
     branches:
       - main
+    paths:
+      - 'yangpa-fe/"*'
+      - ".github/workflows/fe.yml"
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
